@@ -7,15 +7,16 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../Utils/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
+import {PHOTO_URL, BG_URL} from  "../Utils/constants";
 
 const Login = () => {
   const [isSignIn, setisSignIn] = useState(true);
   const [errorMessage, seterrorMessage] = useState(null);
   const dispatch=useDispatch();
-  const navigate = useNavigate();
+ 
   const togglehandler = () => {
     setisSignIn(!isSignIn);
   };
@@ -33,6 +34,7 @@ const Login = () => {
     );
     seterrorMessage(message);
     if (message) return;
+
     if (!isSignIn) {
       // SignUp form
       createUserWithEmailAndPassword(
@@ -46,7 +48,7 @@ const Login = () => {
           console.log(user);
           updateProfile(user, {
             displayName: fullName?.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/149590325?v=4",
+            photoURL: {PHOTO_URL},
           })
             .then(() => {
               // Profile updated!
@@ -59,7 +61,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
+              
             })
             .catch((error) => {
               // An error occurred
@@ -82,7 +84,28 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: fullName?.current?.value,
+            photoURL: {PHOTO_URL},
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
+          
           // ...
         })
         .catch((error) => {
@@ -98,7 +121,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/16006346-87f9-4226-bc25-a1fb346a2b0c/9662d0fd-0547-4665-b887-771617268815/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
+          src={BG_URL}
           alt="background"
         />
       </div>
