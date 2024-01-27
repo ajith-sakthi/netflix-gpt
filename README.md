@@ -27,6 +27,13 @@
 - Get trailer video from `video` api
 - Embeded the you tube videoa and make video autoplay
 - Using tailwind css to look main container good
+- Start Build a second container
+- Create a movie list
+- Get data of now playing, top rated, popular and upcoming
+- Update that data to redux store
+- Create customs hooks for top rated, popular and upcoming movie for clean code
+- Create a movies cards dynamically
+- Made css to look good
 
 
 ## Features

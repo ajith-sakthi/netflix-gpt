@@ -2,9 +2,15 @@ import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import Maincontainer from "./Maincontainer";
 import Secondarycontainer from "./Secondarycontainer";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import usePopularMovies from "../hooks/usePopularMovies";
+import useUpcomingMovies from "../hooks/useUpcomingMovies";
 
 const Browse = () => {
   useNowPlayingMovies();
+  useTopRatedMovies();
+  usePopularMovies();
+  useUpcomingMovies();
 
   return (
     <div>
@@ -23,5 +29,5 @@ export default Browse;
  *    -background video
  * secondary container
  *    -Movies list * N
- *    -Different list * N
+ *    -Different cardss * N
  */
