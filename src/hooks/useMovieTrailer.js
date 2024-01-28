@@ -13,7 +13,7 @@ const useMovieTrailer = (movieId) => {
         "/videos?language=en-US",
       API_OPTIONS
     );
-    console.log(movieId);
+    // console.log(movieId);
     const json = await data.json();
     // console.log(json);
 

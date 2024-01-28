@@ -45,7 +45,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           updateProfile(user, {
             displayName: fullName?.current?.value,
             photoURL: {PHOTO_URL},
@@ -115,7 +115,7 @@ const Login = () => {
         });
     }
   };
-
+  
   return (
     <div>
       <Header />

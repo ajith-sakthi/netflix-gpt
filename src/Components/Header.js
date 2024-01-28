@@ -4,14 +4,16 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../Utils/userSlice";
-import { LOGO_URL } from "../Utils/constants";
+import { LOGO_URL, SUPPORTED_LANGUGAGES } from "../Utils/constants";
+import { viewGptSearch } from "../Utils/toggleGptSearchSlice";
+import { addLanguage } from "../Utils/langSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const user= useSelector((store) => {return console.log(store.name)} )
   const user = useSelector((store) => store.name);
   // console.log(user);
+  const gptSearchValue = useSelector((store) => store.gptSearch?.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -21,6 +23,7 @@ const Header = () => {
       .catch((error) => {
         navigate("/error");
       });
+      dispatch(viewGptSearch());
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,11 +49,36 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
+  const toggleGptSearchHandler=()=>{
+    dispatch(viewGptSearch());
+  }
+
+  const langHandler=(e)=>{
+    dispatch(addLanguage(e.target.value))
+  }
+
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between">
       <img className="w-44" src={LOGO_URL} alt="logo" />
+
       {user && (
-        <div className="flex p-2">
+        <div className="flex p-2 items-center">
+          {gptSearchValue && <select className="bg-gray-700 text-white px-4 py-2 mr-2 rounded-md" onChange={langHandler}>
+            {SUPPORTED_LANGUGAGES.map((lang) => (
+              <option key={lang.identifier} value={lang.identifier}>
+                {lang.name}
+              </option>
+            ))}
+          </select>}
+          
+          <div>
+            <button
+              className="bg-red-500 px-8 py-2 mr-2 rounded-md text-white"
+              onClick={toggleGptSearchHandler}
+            >
+              {gptSearchValue ? "Home" : "GPT Search"}
+            </button>
+          </div>
           <img
             className="w-12 h-12"
             src="../Netflix-avatar.png"

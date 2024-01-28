@@ -34,6 +34,8 @@
 - Create customs hooks for top rated, popular and upcoming movie for clean code
 - Create a movies cards dynamically
 - Made css to look good
+- Create a gptSearch button to navigate gptSearch page
+- Added a multi-language feature
 
 
 ## Features
