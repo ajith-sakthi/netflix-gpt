@@ -36,6 +36,14 @@
 - Made css to look good
 - Create a gptSearch button to navigate gptSearch page
 - Added a multi-language feature
+- Get Open Ai API
+- Made openai api call to get movie names related to prompt
+- Search the movie details of name given by gpt in tmdb database
+- Create a movie recommendation page - reuse the movielist component
+- Memoization
+- Added .env file to .gitignore
+- Make a app mobile responsive
+
 
 
 ## Features
