@@ -1,7 +1,6 @@
 {
   "name": "netflix-gpt",
   "version": "0.1.0",
-  "homepage": "https://github.com/ajith-sakthi/netflix-gpt",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -20,9 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -44,7 +41,6 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.1.0",
-    "gh-pages": "^6.1.1",
     "tailwindcss": "^3.4.1"
   }
 }

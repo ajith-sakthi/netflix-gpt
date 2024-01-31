@@ -23,8 +23,9 @@ const Header = () => {
       .catch((error) => {
         navigate("/error");
       });
-    dispatch(viewGptSearch());
+      gptSearchValue &&  dispatch(viewGptSearch());
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
