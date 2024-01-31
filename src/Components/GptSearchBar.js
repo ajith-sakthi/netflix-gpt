@@ -22,7 +22,7 @@ const GptSearchBar = () => {
 
   const handleGptSearch=async ()=>{
     
-    console.log(searchText.current.value);
+  
       const gptQuery =
     "Act as a movie recommendation system and suggest some movies for query:" +
     searchText.current.value +
@@ -35,7 +35,7 @@ const GptSearchBar = () => {
     // console.log(gptSearchResults)
     // if(!gptSearchResults.choices) {
     //   return <ErrorPage></ErrorPage>}
-    console.log(gptSearchResults.choices[0].message.content)
+    // console.log(gptSearchResults.choices[0].message.content)
     const movies=gptSearchResults?.choices[0]?.message?.content.split(",")
     // ['Andaz Apna Apna', ' Golmaal', ' Chupke Chupke', ' Sholay', ' Padosan']
 
@@ -46,7 +46,7 @@ const GptSearchBar = () => {
     const promiseArray=movies.map((movie)=> searchGptMovies(movie))
     // [Promises,Promises,Promises,Promises,Promises,]
     const tmbdSearchResults=await Promise.all(promiseArray);
-    console.log(tmbdSearchResults)
+    // console.log(tmbdSearchResults)
     
    dispatch(addGptMovies({moviesName:movies,moviesTmdbResults:tmbdSearchResults}))
   }

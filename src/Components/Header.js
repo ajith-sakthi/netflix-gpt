@@ -23,7 +23,7 @@ const Header = () => {
       .catch((error) => {
         navigate("/error");
       });
-      dispatch(viewGptSearch());
+    dispatch(viewGptSearch());
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -49,14 +49,14 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  const toggleGptSearchHandler=()=>{
+  const toggleGptSearchHandler = () => {
     dispatch(viewGptSearch());
-    dispatch(addGptMovies({moviesName:null,moviesTmdbResults:null}))
-  }
+    dispatch(addGptMovies({ moviesName: null, moviesTmdbResults: null }));
+  };
 
-  const langHandler=(e)=>{
-    dispatch(addLanguage(e.target.value))
-  }
+  const langHandler = (e) => {
+    dispatch(addLanguage(e.target.value));
+  };
 
   return (
     <div className="absolute px-8 pb-0 md:py-2 md:bg-gradient-to-b from-black z-10 w-full flex flex-col items-center md:flex-row justify-between">
@@ -64,14 +64,19 @@ const Header = () => {
 
       {user && (
         <div className="flex p-0 md:p-2  md:items-center">
-          {gptSearchValue && <select className="bg-gray-700 text-white px-4 py-2 mr-2 rounded-md" onChange={langHandler}>
-            {SUPPORTED_LANGUGAGES.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-            ))}
-          </select>}
-          
+          {gptSearchValue && (
+            <select
+              className="bg-gray-700 text-white px-4 py-2 mr-2 rounded-md"
+              onChange={langHandler}
+            >
+              {SUPPORTED_LANGUGAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+
           <div>
             <button
               className="bg-red-500 px-4 py-1 md:px-8 md:py-2 mr-2 rounded-md text-white"
@@ -80,33 +85,37 @@ const Header = () => {
               {gptSearchValue ? "Home" : "GPT Search"}
             </button>
           </div>
-          {gptSearchValue ? (<><img
-            className="hidden md:inline-block w-12 h-12"
-            src="../Netflix-avatar.png"
-            alt="user-pic"
-          />
-            
-          <button
-            className="hidden md:inline-block bg-black text-white font-bold m-2 p-2 rounded-lg "
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button></>) : 
-          (<>
-          
-          <img
-            className="hidden md:block w-10 h-10 md:w-12 md:h-12"
-            src="../Netflix-avatar.png"
-            alt="user-pic"
-          />
+          {gptSearchValue ? (
+            <>
+              <img
+                className="hidden md:inline-block w-12 h-12"
+                src="../Netflix-avatar.png"
+                alt="user-pic"
+              />
 
-          <button
-            className="bg-black text-white font-bold px-4 py-1   md:m-2 md:p-2 rounded-lg "
-            onClick={handleSignOut}
-          >
-            (Sign Out)
-          </button>
-          </> )}
+              <button
+                className="hidden md:inline-block bg-black text-white font-bold m-2 p-2 rounded-lg "
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <img
+                className="hidden md:block w-10 h-10 md:w-12 md:h-12"
+                src="../Netflix-avatar.png"
+                alt="user-pic"
+              />
+
+              <button
+                className="bg-black text-white font-bold px-4 py-1   md:m-2 md:p-2 rounded-lg "
+                onClick={handleSignOut}
+              >
+                (Sign Out)
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
